@@ -17,7 +17,7 @@ x3min = -70
 x3max =-40
 xlist = ((x1min, x1max), (x2min, x2max), (x3min, x3max))
 rnd = 3  # Точність округлення
-timing = 0 #Час виконання циклів
+
 
 
 class l():
