@@ -3,9 +3,10 @@ from math import *
 from numpy import *
 from scipy.stats import f, t
 from _pydecimal import Decimal
-
-
-
+av4=[]
+av3=[]
+av2=[]
+av1=[]
 p = 0.95  # Ймовірність для критеріїв
 m = 3  # Початкова кількість експериментів
 N = 4  # Початкова кількість дослідів
@@ -35,6 +36,7 @@ class l():
         self.ydisplist = []
         self.xlist = xlist
         self.round = rnd
+
 
     def equation(self, N, m):
         rnd = self.round
@@ -72,13 +74,14 @@ class l():
             ymed.append(round(sum(self.ylist[i]) / m, rnd))
         my = round(sum(ymed) / N, rnd)  # Коефіціент b0 норм.
 
-        if N != 4:  
+        if N != 4:
             self.blist = []
             matrmlist = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
                          [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
                          [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
             matrklist = [0, 0, 0, 0, 0, 0, 0, 0]
             if N == 14:
+                x.appednd(1)
                 matrklist.extend([0, 0, 0])
                 matrmlist.extend([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]])
                 for i in range(11):
@@ -109,6 +112,7 @@ class l():
             solve = linalg.solve(array(matrmlist), array(matrklist))  # Коефіціенти bi нaтур. N = 8,14
 
             if N == 8:
+                x.append(1)
                 a1 = round(  # Коефіціенти b1-b123 нормовані N = 8
                     (-1 * (ymed[0] + ymed[1] + ymed[2] + ymed[3]) + 1 * (ymed[4] + ymed[5] + ymed[6] + ymed[7])) / N,
                     rnd)
@@ -206,6 +210,7 @@ class l():
             t123 = round(fabs(self.alist[7]) / skoef, self.round)
             self.tlist = [t0, t1, t2, t3, t12, t13, t23, t123]
             if N == 14:
+                x.append(1)
                 t11 = round(fabs(self.alist[8]) / skoef, self.round)
                 t22 = round(fabs(self.alist[9]) / skoef, self.round)
                 t33 = round(fabs(self.alist[10]) / skoef, self.round)
@@ -228,6 +233,7 @@ class l():
                     blist[4] * xmatr[i][0] * xmatr[i][1] + blist[5] * xmatr[i][0] * xmatr[i][2] + blist[6] *
                     xmatr[i][1] * xmatr[i][2] + blist[7] * xmatr[i][0] * xmatr[i][1] * xmatr[i][2], self.round))
             if N == 14:
+
                 for i in range(N):
                     self.yznachlist[i] += round(
                         blist[8] * xmatr[i][0] ** 2 + blist[9] * xmatr[i][1] ** 2 + blist[10] * xmatr[i][2] ** 2,
@@ -269,9 +275,9 @@ class l():
         Task.printfish(N)
         if froz > fkr:
             if N == 14:
-                print("   За критерієм Фішера рівняння з квадратичними членами неадекватне оригіналу з ймовірністю", p)
+                print("   За критерієм Фішера рівняння з квадратичними членами неадекватне оригіналу з ймовірністю\n\n", p)
             else:
-                print("   За критерієм Фішера лінійне рівняння неадекватне оригіналу з ймовірністю", p)
+                print("   За критерієм Фішера лінійне рівняння неадекватне оригіналу з ймовірністю\n\n", p)
                 if N == 4:
                     N = 8
                     print("\nПроведемо досліди для рівняння з ефектом взаємодії, тоді N =", N)
@@ -283,7 +289,7 @@ class l():
                 Task.student(N)
                 Task.fishers(N)
         else:
-            print("   За критерієм Фішера лінійне рівняння регресії адекватне оригіналу з ймовірністю", p)
+            print("   За критерієм Фішера лінійне рівняння регресії адекватне оригіналу з ймовірністю\n\n", p)
 
     def printequa(self, N):
         print("\nГенеруємо", N, "функцій відгуку для", self.m, "експериметнів:")
@@ -339,6 +345,7 @@ b3 = a3 = (-1)*({0}+{3}) + 1*({1}+{2}) = {7}\n".format(*self.ymed, *self.alist))
 
     def printstud(self, N):
         if N == 4:
+
             print("\n2)Критерій Стьюдента:\n")
             print("   Dвідтворюваності = ({0}+{1}+{2}+{3})/4 = {4}".format(*self.ydisplist, self.dvidtv))
             print(
@@ -364,7 +371,14 @@ t3 = |{3}|/{4} = {8}\n   ".format(*self.alist, self.skoef, *self.tlist))
                                                                       self.yznachlist[2]))
             print("   {0} + {1}*{4} + {2}*{5} + {3}*{6} = {7}".format(*self.blist, x1max, x2max, x3min,
                                                                       self.yznachlist[3]))
+
+            av1.append(self.tlist[0])
+            av2.append(self.tlist[1])
+            av3.append(self.tlist[2])
+            av4.append(self.tlist[3])
+
         else:
+            x.append(1)
             print("\n3)Критерій Стьюдента:\n")
             print("   Dвідтворюваності =", self.dvidtv)
             print(
@@ -386,6 +400,7 @@ t3 = |{3}|/{4} = {8}\n   ".format(*self.alist, self.skoef, *self.tlist))
                 print("   Y{0} = {1}".format(i + 1, self.yznachlist[i]))
 
     def printfish(self, N):
+
         print("\n3)Критерій Фішера:\n")
         print("   f4 = {2} - {0} = {1}".format(self.d, self.f4, self.Nroz))
         if N == 4:
@@ -395,12 +410,29 @@ t3 = |{3}|/{4} = {8}\n   ".format(*self.alist, self.skoef, *self.tlist))
         else:
             print("   Daдекв = ", self.dadekv)
         print("   Fр = {0}/{1} = {2}".format(self.dadekv, self.dvidtv, self.froz))
-        print("   За таблицею Fкр =", self.fkr)
+        print("   За таблицею Fкр =\n", self.fkr)
+
+for i in range(100):
+ Task = l(p, xlist, rnd)
+ Task.equation(N, m)
+ Task.cochran(N, m)
+ Task.student(N)
+ Task.fishers(N)
+print("\n\n\n\n")
 
 
 
-Task = l(p, xlist, rnd)
-Task.equation(N, m)
-Task.cochran(N, m)
-Task.student(N)
-Task.fishers(N)
+
+
+
+
+
+
+
+print("Середнє значення t1=",sum(((av1)))/100)
+print("Середнє значення t2=",sum(((av2)))/100)
+print("Середнє значення t3=",sum(((av3)))/100)
+print("Середнє значення t4=",sum(((av4)))/100)
+
+
+
