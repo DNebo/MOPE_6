@@ -81,7 +81,7 @@ class l():
                          [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
             matrklist = [0, 0, 0, 0, 0, 0, 0, 0]
             if N == 14:
-                x.appednd(1)
+                
                 matrklist.extend([0, 0, 0])
                 matrmlist.extend([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]])
                 for i in range(11):
@@ -210,7 +210,7 @@ class l():
             t123 = round(fabs(self.alist[7]) / skoef, self.round)
             self.tlist = [t0, t1, t2, t3, t12, t13, t23, t123]
             if N == 14:
-                x.append(1)
+                
                 t11 = round(fabs(self.alist[8]) / skoef, self.round)
                 t22 = round(fabs(self.alist[9]) / skoef, self.round)
                 t33 = round(fabs(self.alist[10]) / skoef, self.round)
@@ -378,7 +378,7 @@ t3 = |{3}|/{4} = {8}\n   ".format(*self.alist, self.skoef, *self.tlist))
             av4.append(self.tlist[3])
 
         else:
-            x.append(1)
+            
             print("\n3)Критерій Стьюдента:\n")
             print("   Dвідтворюваності =", self.dvidtv)
             print(
